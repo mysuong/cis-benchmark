@@ -91,19 +91,41 @@ if [[ $(whoami) != "root" ]]; then
         exit 1
 fi
 
-echo "CIS CentOS Linux 7 Benchmark (v2.2.0 - 12-27-2017)"
+echo "CIS CentOS Linux 7 Benchmark (v3.1.2 - 07-08-2023)"
 echo
 echo hostname : `hostname`
 echo time     : `date`
 echo =================================================================================
-# test_wrapper 1.1.1.1 "Ensure mounting of cramfs filesystems is disabled (Automated)" Yes Server1 Workstation1
-# test_wrapper 1.1.1.2 "Ensure mounting of squashfs filesystems is disabled (Automated)" Yes Server1 Workstation1
-# test_wrapper 1.1.1.3 "Ensure mounting of udf filesystems is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.1.1 "Ensure mounting of cramfs filesystems is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.1.2 "Ensure mounting of squashfs filesystems is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.1.3 "Ensure mounting of udf filesystems is disabled (Automated)" Yes Server1 Workstation1
 test_wrapper 1.1.2 "Ensure /tmp is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.3 "Ensure noexec option set on /tmp partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.4 "Ensure nodev option set on /tmp partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.5 "Ensure nosuid option set on /tmp partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.6 "Ensure /dev/shm is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.7 "Ensure noexec option set on /dev/shm partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.8 "Ensure nodev option set on /dev/shm partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.9 "Ensure nosuid option set on /dev/shm partition (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.10 "Ensure separate partition exists for /var (Automated)" Yes Server2 Workstation2
+test_wrapper 1.1.11 "Ensure separate partition exists for /var/tmp (Automated)" Yes Server2 Workstation2
+test_wrapper 1.1.12 "Ensure /var/tmp partition includes the noexec option (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.13 "Ensure /var/tmp partition includes the nodev option (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.14 "Ensure /var/tmp partition includes the nosuid option (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.15 "Ensure separate partition exists for /var/log (Automated)" Yes Server2 Workstation2
+test_wrapper 1.1.16 "Ensure separate partition exists for /var/log/audit (Automated)" Yes Server2 Workstation2
+test_wrapper 1.1.17 "Ensure separate partition exists for /home (Automated)" Yes Server2 Workstation2
+test_wrapper 1.1.18 "Ensure /home partition includes the nodev option (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.19 "Ensure removable media partitions include noexec option (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.20 "Ensure nodev option set on removable media partitions (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.21 "Ensure nosuid option set on removable media partitions (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.22 "Ensure sticky bit is set on all world-writable directories (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.23 "Disable Automounting (Automated)" Yes Server1 Workstation2
+test_wrapper 1.2.1 "Ensure GPG keys are configured (Manual)" No Server1 Workstation1
+test_wrapper 1.2.2 "Ensure package manager repositories are configured (Manual)" No Server1 Workstation1
 # test_wrapper 1.1.2 "Ensure separate partition exists for /tmp (Scored)" Yes Server2 Workstation2
-# test_wrapper 1.1.3 "Ensure nodev option set on /tmp partition (Scored)" Yes Server1 Workstation1
+# test_wrapper 1.1.2 "Ensure separate partition exists for /tmp (Scored)" Yes Server2 Workstation2
 # test_wrapper 1.1.4 "Ensure nosuid option set on /tmp partition (Scored)" Yes Server1 Workstation1
-# test_wrapper 1.1.5 "Ensure noexec option set on /tmp partition (Scored)" Yes Server1 Workstation1
 # test_wrapper 1.1.6 "Ensure separate partition exists for /var (Scored)" Yes Server2 Workstation2
 # test_wrapper 1.1.7 "Ensure separate partition exists for /var/tmp (Scored)" Yes Server2 Workstation2
 # test_wrapper 1.1.8 "Ensure nodev option set on /var/tmp partition (Scored)" Yes Server1 Workstation1

@@ -1,7 +1,8 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.21 - Ensure sticky bit is set on all world-writable directories (Scored)
+# 1.1.21 - Ensure nosuid option set on removable media partitions (Automated)
 
-dirs="$(df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \))"
-[[ -z "${dirs}" ]] || exit 1
+for rmpo in $(lsblk -o RM,MOUNTPOINT | awk -F " " '/1/ {if ($2 != "") print $2}'); do
+ 	findmnt "$rmpo" | grep nosuid || exit $?
+done

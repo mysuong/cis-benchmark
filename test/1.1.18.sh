@@ -1,12 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.18 - Ensure nodev option set on removable media partitions (Not Scored)
+# 1.1.18 - Ensure /home partition includes the nodev option (Automated)
 
-MEDIA=$(mount -l -t vfat,iso9660,ext)
-
-if [[ -z $MEDIA ]]; then
-        exit 0
-else
-        echo $MEDIA | grep "nodev" || exit $?
-fi
+findmnt /home | grep nodev || exit $?

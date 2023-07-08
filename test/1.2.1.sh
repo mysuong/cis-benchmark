@@ -1,8 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.2.1 - Ensure package manager repositories are configured (Not Scored)
+# 1.2.1 - Ensure GPG keys are configured (Manual)
 
-yum repolist
-
-exit 1
+keys="$(rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n' \ | grep -Ev '(gpg-pubkey-f4a80eb5-53a7ff4b|gpg-pubkey-352c64e5-52ae6884|gpg-pubkey-621e9f35-58adea78)' || exit $?)"
+[[ -z "${keys}" ]] || exit 1

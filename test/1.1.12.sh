@@ -1,6 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.12 - Ensure separate partition exists for /var/log/audit (Scored)
+# 1.1.12 - Ensure /var/tmp partition includes the noexec option (Automated)
 
-mount | grep /var/log/audit || exit $?
+findmnt /var/tmp | grep noexec || exit $?
+
