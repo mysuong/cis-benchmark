@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.17 - Ensure noexec option set on /dev/shm partition (Scored)
+# 1.1.17 - Ensure separate partition exists for /home (Automated)
 
-mount | grep /dev/shm | grep noexec || exit $?
+findmnt /home || exit $?

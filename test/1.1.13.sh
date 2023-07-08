@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.13 - Ensure separate partition exists for /home (Scored)
+# 1.1.13 - Ensure /var/tmp partition includes the nodev option (Automated)
 
-mount | grep /home || exit $?
+findmnt /var/tmp | grep nodev || exit $?

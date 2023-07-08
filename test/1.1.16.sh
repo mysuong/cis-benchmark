@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.16 - Ensure nosuid option set on /dev/shm partition (Scored)
+# 1.1.16 - Ensure separate partition exists for /var/log/audit (Automated)
 
-mount | grep /dev/shm | grep nosuid || exit $?
+findmnt /var/log/audit || exit $?

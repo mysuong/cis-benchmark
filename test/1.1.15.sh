@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.15 - Ensure nodev option set on /dev/shm partition (Scored)
+# 1.1.15 - Ensure separate partition exists for /var/log (Automated)
 
-mount | grep /dev/shm | grep nodev || exit $?
+findmnt /var/log || exit $?

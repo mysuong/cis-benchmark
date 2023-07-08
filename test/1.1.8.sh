@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.8 - Ensure nodev option set on /var/tmp partition (Scored)
+# 1.1.8 - Ensure nodev option set on /dev/shm partition (Automated)
 
-mount | grep /var/tmp | grep nodev || exit $?
+findmnt /dev/shm | grep nodev || exit $?

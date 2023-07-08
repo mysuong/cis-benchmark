@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.10 - Ensure noexec option set on /var/tmp partition (Scored)
+# 1.1.10 - Ensure separate partition exists for /var (Automated)
 
-mount | grep /var/tmp | grep noexec || exit $?
+findmnt /var || exit $?
