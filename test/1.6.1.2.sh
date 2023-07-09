@@ -1,10 +1,8 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.6.1.2 - Ensure the SELinux state is enforcing (Scored)
+# 1.6.1.2 - Ensure SELinux is not disabled in bootloader configuration (Automated) - Server1 Workstation1
 
-grep SELINUX=enforcing /etc/selinux/config || exit $1
+out=$(grep "^\s*kernel" /boot/grub2/grub.cfg | grep -E "selinux=0|enforcing=0")
+[[ -z "${out}" ]] || exit 1
 
-sestatus | grep -E "SELinux status:\s*enabled" || exit $1
-sestatus | grep -E "Current mode:\s*enforcing" || exit $1
-sestatus | grep -E "Mode from config file:\s*enforcing" || exit $1

@@ -1,10 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 2.2.7 - Ensure NFS and RPC are not enabled (Scored)
+# 2.2.7 -  Ensure DNS Server is not installed (Automated) - Server1 Workstation1
 
-variable="nfs|nfs-server|rpcbind"
-for i in $(echo $variable | sed "s/|/ /g")
-do
-    systemctl is-enabled $i 2>&1 | grep -E "(disabled|No such file or directory)" || exit $?
-done
+systemctl is-enabled bind 2>&1 | grep -E "(disabled|No such file or directory)" || exit $?

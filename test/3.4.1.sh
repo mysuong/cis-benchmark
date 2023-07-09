@@ -1,7 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 3.4.1 - Ensure TCP Wrappers is installed (Scored)
+# 3.4.1 - Ensure DCCP is disabled (Automated) - Server2 Workstation2
 
-rpm -q tcp_wrappers |grep -E "tcp_wrappers-" || exit $?
-rpm -q tcp_wrappers-libs |grep -E "tcp_wrappers-libs-" || exit $?
+modprobe -n -v dccp | grep -E "(install /bin/true|FATAL: Module dccp not found.)" && exit 0
+[[ -z `lsmod | grep dccp` ]] || exit $?

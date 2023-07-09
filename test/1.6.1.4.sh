@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.6.1.4 - Ensure SETroubleshoot is not installed (Scored)
+# 1.6.1.4 - Ensure the SELinux mode is enforcing or permissive (Automated) - Server1 Workstation1
 
-rpm -q setroubleshoot | grep -E "package setroubleshoot is not installed" || exit $1
+grep -Ei '^\s*SELINUX=(enforcing|permissive)' /etc/selinux/config

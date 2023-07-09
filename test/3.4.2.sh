@@ -1,7 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 3.4.2 - Ensure /etc/hosts.allow is configured (Scored)
+# 3.4.2 - Ensure SCTP is disabled (Automated) -  Server2 Workstation2
 
-# == you will need to manually review the /etc/hosts.allow file
-exit 1
+modprobe -n -v sctp | grep -E "(install /bin/true|FATAL: Module dccp not found.)" && exit 0
+[[ -z `lsmod | grep sctp` ]] || exit $?

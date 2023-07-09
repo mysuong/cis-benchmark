@@ -1,10 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.2.3 - Ensure gpgcheck is globally activated (Scored)
+# 1.2.3 - Ensure gpgcheck is globally activated (Automated) - Server1 Workstation1
 
-if [[ $(ls -A /etc/yum.repos.d/) ]] ; then
-        grep ^gpgcheck /etc/yum.conf /etc/yum.repos.d/* | grep -E "gpgcheck=1" || exit $?
-else
-        grep ^gpgcheck /etc/yum.conf | grep -E "gpgcheck=1" || exit $?
-fi
+non_compliance="$(grep ^gpgcheck /etc/yum.conf /etc/yum.repos.d/* | grep -E 'gpgcheck\s*=\s*[^1]' )"
+[[ -z "${non_compliance}" ]] || exit $?
