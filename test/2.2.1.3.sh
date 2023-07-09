@@ -1,10 +1,12 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 2.2.1.3 - Ensure chrony is configured (Scored)
+# 2.2.1.3 - Ensure ntp is configured (Automated) - Server1 Workstation1
 
-rpm -q chrony | grep -E "^chrony-"
-if [[ $? -eq 0 ]]; then
-        grep -E "^(server|pool)" /etc/chrony.conf || exit $?
-        grep -E "^OPTIONS" /etc/sysconfig/chronyd | grep "OPTIONS=\"-u chrony\"" || exit $?
+cmd="$(systemctl is-enabled ntpd | grep 'enabled')"
+if [[ -n "${cmd}" ]]; then
+ grep -E "^(server|pool)" /etc/ntp.conf || exit $?
+else
+ exit 1
 fi
+

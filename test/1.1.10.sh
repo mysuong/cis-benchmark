@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.10 - Ensure separate partition exists for /var (Automated)
+# 1.1.10 - Ensure separate partition exists for /var (Automated) - Server2 Workstation2
 
 findmnt /var || exit $?

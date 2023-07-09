@@ -1,7 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 1.1.4 - Ensure nodev option set on /tmp partition (Automated)
+# 1.1.4 - Ensure nodev option set on /tmp partition (Automated) - Server1 Workstation1
 
-# mount | grep /tmp | grep nodev || exit $? -> version 2
-findmnt -n /tmp -n | grep -Ev '\bnodev\b' || exit $?
+findmnt /tmp | grep nodev || exit $?

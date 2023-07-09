@@ -1,28 +1,22 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 3.2.1 - Ensure source routed packets are not accepted (Scored)
+# 3.2.1 - Ensure IP forwarding is disabled (Automated) - Server1 Workstation1
 
-sysctl net.ipv4.conf.all.accept_source_route | grep -E "net.ipv4.conf.all.accept_source_route = 0"
-if [[ $? == 0 ]]; then
-        exit 0
+sysctl net.ipv4.ip_forward | grep "net.ipv4.ip_forward = 0" || exit $?
+# Current configuration
+checkipv4="$(grep -E -s "^\s*net\.ipv4\.ip_forward\s*=\s*[^0]+$" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib
+/sysctl.d/*.conf /run/sysctl.d/*.conf)"
+[[ -n "${checkipv4}" ]] && exit 1
+# IPv6 Checking
+if [[ "$ipv6_status" != disabled ]]; then
+# Current status
+sysctl net.ipv6.conf.all.forwarding | grep "net.ipv6.conf.all.forwarding = 0" || exit $?
+# Current configuration
+checkipv6="$(grep -E -s "^\s*net\.ipv6\.conf\.all\.forwarding\s*=\s*[^0]+$" /etc/sysctl.conf /etc/sysctl.d/*.conf 
+/usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf)"
+[[ -n "${checkipv6}" ]] && exit 1
 fi
-
-if [[ $(ls -A /etc/sysctl.d/) ]] ; then
-        grep "net.ipv4.conf.all.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/* | grep -E "net.ipv4.conf.all.accept_source_route = 0" || exit $?
-else
-        grep "net.ipv4.conf.all.accept_source_route" /etc/sysctl.conf | grep -E "net.ipv4.conf.all.accept_source_route = 0" || exit $?
-fi
-
-sysctl net.ipv4.conf.default.accept_source_route | grep -E "net.ipv4.conf.default.accept_source_route = 0"
-if [[ $? == 0 ]]; then
-        exit 0
-fi
-
-if [[ $(ls -A /etc/sysctl.d/) ]] ; then
-        grep "net.ipv4.conf.default.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/* | grep -E "net.ipv4.conf.default.accept_source_route = 0" || exit $?
-else
-        grep "net.ipv4.conf.default.accept_source_route" /etc/sysctl.conf | grep -E "net.ipv4.conf.default.accept_source_route = 0" || exit $?
-fi
+exit 0
 
 
