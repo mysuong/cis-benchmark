@@ -1,7 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 4.2.2.3 - Ensure syslog-ng default file permissions configured (Scored)
+# 4.2.2.3 - Ensure journald is configured to write logfiles to persistent disk (Automated) - Server1 Workstation1
 
 perm=$(grep ^options /etc/syslog-ng/syslog-ng.conf | sed "s/^.* perm\(([0-9]*)\).*$/\1/" | sed "s/[^0-9]//g")
 

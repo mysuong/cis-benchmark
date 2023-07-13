@@ -1,14 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.3.3 - Ensure password reuse is limited (Scored)
+# 5.3.3 - Ensure permissions on SSH public host key files are configured (Automated) - Server1 Workstation1
 
-R=$(egrep '^password\s+sufficient\s+pam_unix.so' /etc/pam.d/password-auth | grep "remember" | sed 's/.*remember=\([0-9]*\).*/\1/g')
-if [[ $R -lt 5 ]] ; then
-        exit 1
-fi
-
-R=$(egrep '^password\s+sufficient\s+pam_unix.so' /etc/pam.d/system-auth |grep "remember" | sed 's/.*remember=\([0-9]*\).*/\1/g')
-if [[ $R -lt 5 ]] ; then
-        exit 1
-fi
+find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' -exec stat {} \;

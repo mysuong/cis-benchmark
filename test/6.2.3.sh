@@ -1,14 +1,9 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 6.2.3 - Ensure no legacy "+" entries exist in /etc/shadow (Scored)
+# 6.2.3 - Ensure all groups in /etc/passwd exist in /etc/group (Automated) - Server1 Workstation1
 
-if [[ -r /etc/shadow ]]; then
-   if [[ $(grep '^\+:' /etc/shadow) -eq '' ]] ; then
-      exit 0
-   else
-      exit 1
-   fi
-else
-   exit 1
-fi
+for i in $(cut -s -d: -f4 /etc/passwd | sort -u ); do
+   grep -q -P "^.*?:[^:]*:$i:" /etc/group
+   if [ $? -ne 0 ]; then exit 1; fi
+done

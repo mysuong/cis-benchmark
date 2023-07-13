@@ -1,6 +1,7 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.6 - Ensure access to the su command is restricted (Scored)
+# 5.6 - Ensure root login is restricted to system console (Manual) - Server1 Workstation1
 
-grep pam_wheel.so /etc/pam.d/su | grep -qE "^auth\s*required\s*pam_wheel.so\s*use_uid\s*$" || exit $?
+cat /etc/securetty
+exit 2

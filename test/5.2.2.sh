@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.2.2 - Ensure SSH Protocol is set to 2 (Scored)
+# 5.2.2 - Ensure sudo commands use pty (Automated) - Server1 Workstation1
 
-grep "^\s*Protocol" /etc/ssh/sshd_config | grep -q "Protocol\s*2" || exit $?
+grep -Ei '^\s*Defaults\s+([^#]\S+,\s*)?use_pty\b' /etc/sudoers /etc/sudoers.d/*

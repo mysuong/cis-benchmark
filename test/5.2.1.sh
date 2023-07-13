@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.2.1 - Ensure permissions on /etc/ssh/sshd_config are configured (Scored)
+# 5.2.1 - Ensure sudo is installed (Automated) - Server1 Workstation1
 
-stat -L -c "%a %u %g" /etc/ssh/sshd_config | grep -q "600 0 0$" || exit $?
+rpm -q sudo | grep -E "sudo" || exit $?

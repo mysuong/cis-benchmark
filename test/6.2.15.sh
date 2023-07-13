@@ -1,14 +1,14 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 6.2.15 - Ensure all groups in /etc/passwd exist in /etc/group (Scored)
+# 6.2.15 - Ensure no users have .forward files (Automated) - Server1 Workstation1
 
-for i in $(cut -s -d: -f4 /etc/passwd | sort -u ); do
-   grep -q -P "^.*?:[^:]*:$i:" /etc/group
-   if [ $? -ne 0 ]; then
-      if [[ $1 -ne '' ]] ; then
-         echo "Group $i is referenced by /etc/passwd but does not exist in /etc/group"
-      fi
-      exit 1
+awk -F: '($1!~/(root|halt|sync|shutdown|nfsnobody)/ && $7!~/^(\/usr)?\/sbin\/nologin(\/)?$/ && $7!~/(\/usr)?\/bin\/false(\/)?$/) { print $1 " " $6 }' /etc/passwd | while read -r user dir; do
+   if [ -d "$dir" ]; then
+   file="$dir/.forward"
+   if [ ! -h "$file" ] && [ -f "$file" ]; then
+   echo "User: \"$user\" file: \"$file\" exists"
+   exit 1
+   fi
    fi
 done

@@ -1,10 +1,13 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.4.2 - Ensure system accounts are non-login (Scored)
+# 5.4.2 - Ensure lockout for failed password attempts is configured (Automated) - Server1 Workstation1
 
-CNT=$(egrep -v "^\+" /etc/passwd | awk -F: '($1!="root" && $1!="sync" && $1!="shutdown" && $1!="halt" && $3<500 && $7!="/sbin/nologin" && $7!="/bin/false") {print}' |wc -l)
-
-if [[ $CNT -ne 0 ]]; then
-        exit 1
-fi
+cat /etc/pam.d/password-auth | grep -E "auth\s*required\s*pam_faillock.so" || exit $?
+cat /etc/pam.d/password-auth | grep -E "auth\s*\[success=1\s*default=bad\]\s*pam_unix.so" || exit $?
+cat /etc/pam.d/password-auth | grep -E "auth\s*\[default=die\]\s*pam_faillock.so" ||exit $?
+cat /etc/pam.d/password-auth | grep -E "auth\s*sufficient\s*pam_faillock.so" || exit $?
+cat /etc/pam.d/system-auth | grep -E "auth\s*required\s*pam_faillock.so" || exit $?
+cat /etc/pam.d/system-auth | grep -E "auth\s*\[success=1\s*default=bad\]\s*pam_unix.so" || exit $?
+cat /etc/pam.d/system-auth | grep -E "auth\s*\[default=die\]\s*pam_faillock.so" ||exit $?
+cat /etc/pam.d/system-auth | grep -E "auth\s*sufficient\s*pam_faillock.so" || exit $?

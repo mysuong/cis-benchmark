@@ -1,7 +1,9 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 4.1.16 - Ensure system administrator actions (sudolog) are collected (Scored)
+# 4.1.16 - Ensure kernel module loading and unloading is collected (Automated) - Server2 Workstation2
 
-cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+actions" | egrep "\-p[[:space:]]+wa" \
-  | egrep -q "\-w[[:space:]]+\/var\/log\/sudo.log" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+modules" | egrep "\-p[[:space:]]+x" | egrep -q "\-w[[:space:]]+\/sbin\/insmod" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+modules" | egrep "\-p[[:space:]]+x" | egrep -q "\-w[[:space:]]+\/sbin\/rmmod" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+modules" | egrep "\-p[[:space:]]+x" | egrep -q "\-w[[:space:]]+\/sbin\/modprobe" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+modules" | egrep "\-S[[:space:]]+delete_module" | egrep "\-F[[:space:]]+arch=b64" | egrep "\-S[[:space:]]+init_module" | egrep -q "\-a[[:space:]]+always,exit|\-a[[:space:]]+exit,always" || exit 1

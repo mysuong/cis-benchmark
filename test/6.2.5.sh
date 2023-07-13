@@ -1,10 +1,9 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 6.2.5 - Ensure root is the only UID 0 account (Scored)
+# 6.2.5 - Ensure no duplicate user names exist (Automated) - Server1 Workstation1
 
-if [[ $(cat /etc/passwd | awk -F: '($3 == 0) { print $1 }') -eq 'root' ]] ; then
-   exit 0
-else
+cut -d: -f1 /etc/passwd | sort | uniq -d | while read x; do
+   echo "Duplicate login name ${x} in /etc/passwd"
    exit 1
-fi
+done

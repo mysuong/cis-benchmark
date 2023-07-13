@@ -1,24 +1,21 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 6.2.10 - Ensure users' dot files are not group or world writable (Scored)
+# 6.2.10 - Ensure root PATH Integrity (Automated) - Server1 Workstation1
 
-cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != "/sbin/nologin" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-   for file in $dir/.[A-Za-z0-9]*; do
-      if [ ! -h "$file" -a -f "$file" ]; then
-         fileperm=`ls -ld $file | cut -f1 -d" "`
-            if [ `echo $fileperm | cut -c6` != "-" ]; then
-               if [[ $1 -ne '' ]] ; then
-                  echo "Group Write permission set on file $file"
-               fi
-            exit 1
-         fi
-         if [ `echo $fileperm | cut -c9` != "-" ]; then
-            if [[ $1 -ne '' ]] ; then
-               echo "Other Write permission set on file $file"
-            fi
-            exit 1
-         fi
-      fi
-   done
+RPCV="$(sudo -Hiu root env | grep '^PATH' | cut -d= -f2)"
+echo "$RPCV" | grep -q "::" && echo "root's path contains a empty directory (::)"
+echo "$RPCV" | grep -q ":$" && echo "root's path contains a trailing (:)"
+
+for x in $(echo "$RPCV" | tr ":" " "); do
+   if [ -d "$x" ]; then
+   ls -ldH "$x" | awk '$9 == "." {print "PATH contains current working directory (.); exit 1"}
+   $3 != "root" {print $9, "is not owned by root"; exit 1}
+   substr($1,6,1) != "-" {print $9, "is group writable"; exit 1}
+   substr($1,9,1) != "-" {print $9, "is world writable"; exit 1}'
+[[ $? == 0 ]] || exit $?
+   else
+   echo "$x is not a directory"
+   exit 1
+   fi
 done
