@@ -1,13 +1,14 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 6.2.7 - Ensure all users' home directories exist (Scored)
+# 6.2.7 - Ensure no duplicate UIDs exist (Automated) - Server1 Workstation1
 
-cat /etc/passwd | egrep -v '^(root|halt|sync|shutdown)' | awk -F: '($7 != "/sbin/nologin" && $7 != "/bin/false") { print $1 " " $6 }' | while read user dir; do
-   if [ ! -d "$dir" ]; then
-      if [[ $1 -ne '' ]] ; then
-         echo $dir;
-      fi
-      exit 1
+cut -f3 -d":" /etc/passwd | sort -n | uniq -c | while read -r x; do
+   [ -z "$x" ] && break
+   set - "$x"
+   if [ "$1" -gt 1 ]; then
+   users=$(awk -F: '($3 == n) { print $1 }' n="$2" /etc/passwd | xargs)
+   echo "Duplicate UID ($2): $users"
+   exit 1
    fi
 done

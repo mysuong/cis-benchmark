@@ -1,7 +1,10 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 4.1.3 - Ensure auditing for processes that start prior to auditd is enabled (Scored)
+# 4.1.3 - Ensure events that modify date and time information are collected (Automated) - Server2 Workstation2
 
-grep_grub="$(grep "^[[:space:]]*linux" /boot/grub2/grub.cfg | grep -v 'audit=1')"
-[[ -z "${grep_grub}" ]] || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+time-change" | egrep "\-S[[:space:]]+settimeofday" | egrep "\-S[[:space:]]+adjtimex" | egrep "\-F[[:space:]]+arch=b64" | egrep -q "\-a[[:space:]]+always,exit|\-a[[:space:]]+exit,always" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+time-change" | egrep "\-S[[:space:]]+settimeofday" | egrep "\-S[[:space:]]+adjtimex" | egrep "\-F[[:space:]]+arch=b32" | egrep "\-S[[:space:]]+stime" | egrep -q "\-a[[:space:]]+always,exit|\-a[[:space:]]+exit,always" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+time-change" | egrep "\-F[[:space:]]+arch=b64" | egrep "\-S[[:space:]]+clock_settime" | egrep -q "\-a[[:space:]]+always,exit|\-a[[:space:]]+exit,always" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+time-change" | egrep "\-F[[:space:]]+arch=b32" | egrep "\-S[[:space:]]+clock_settime" | egrep -q "\-a[[:space:]]+always,exit|\-a[[:space:]]+exit,always" || exit 1
+cut -d\# -f1 /etc/audit/audit.rules | egrep "\-k[[:space:]]+time-change" | egrep "\-p[[:space:]]+wa" | egrep -q "\-w[[:space:]]+\/etc\/localtime" || exit 1

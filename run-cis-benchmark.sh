@@ -91,13 +91,13 @@ if [[ $(whoami) != "root" ]]; then
         exit 1
 fi
 
-echo "CIS CentOS Linux 7 Benchmark (v3.1.2)"
+echo "CIS CentOS Linux 7 Benchmark (v3.1.2 - 08-31-2021)"
 echo
 echo hostname : `hostname`
 echo time     : `date`
 echo =================================================================================
 test_wrapper 1.1.1.1 "Ensure mounting of cramfs filesystems is disabled (Automated)" Yes Server1 Workstation1
-test_wrapper 1.1.1.2 "Ensure mounting of squashfs filesystems is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 1.1.1.2 "Ensure mounting of squashfs filesystems is disabled (Automated)" Yes Server2 Workstation2
 test_wrapper 1.1.1.3 "Ensure mounting of udf filesystems is disabled (Automated)" Yes Server1 Workstation1
 test_wrapper 1.1.2 "Ensure /tmp is configured (Automated)" Yes Server1 Workstation1
 test_wrapper 1.1.3 "Ensure noexec option set on /tmp partition (Automated)" Yes Server1 Workstation1
@@ -225,7 +225,119 @@ test_wrapper 3.5.3.2.5 "Ensure iptables rules are saved (Automated)" Yes Server1
 test_wrapper 3.5.3.2.6 "Ensure iptables is enabled and running (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.3.1 "Ensure ip6tables loopback traffic is configured (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.3.2 "Ensure ip6tables outbound and established connections are configured (Manual)" No Server1 Workstation1
-test_wrapper 3.5.3.3.3 " Ensure ip6tables firewall rules exist for all open ports (Automated)" Yes Server1 Workstation1
+test_wrapper 4.1.1.1 "Ensure auditd is installed (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.1.2 "Ensure auditd service is enabled and running (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.1.3 "Ensure auditing for processes that start prior to auditd is enabled (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.2.1 "Ensure audit log storage size is configured (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.2.2 "Ensure audit logs are not automatically deleted (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.2.3 "Ensure system is disabled when audit logs are full (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.2.4 "Ensure audit_backlog_limit is sufficient (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.3 "Ensure events that modify date and time information are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.4 "Ensure events that modify user/group information are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.5 "Ensure events that modify the system's network environment are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.6 "Ensure events that modify the system's Mandatory Access Controls are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.7 "Ensure login and logout events are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.8 "Ensure session initiation information is collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.9 "Ensure discretionary access control permission modification events are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.10 "Ensure unsuccessful unauthorized file access attempts are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.11 "Ensure use of privileged commands is collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.12 "Ensure successful file system mounts are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.13 "Ensure file deletion events by users are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.14 "Ensure changes to system administration scope (sudoers) is collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.15 "Ensure system administrator command executions (sudo) are collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.16 "Ensure kernel module loading and unloading is collected (Automated)" Yes Server2 Workstation2
+test_wrapper 4.1.17 "Ensure the audit configuration is immutable (Automated)" Yes Server2 Workstation2
+test_wrapper 4.2.1.1 "Ensure rsyslog is installed (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.1.2 "Ensure rsyslog Service is enabled and running (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.1.3 "Ensure rsyslog default file permissions configured (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.1.4 "Ensure logging is configured (Manual)" No Server1 Workstation1
+test_wrapper 4.2.1.5 "Ensure rsyslog is configured to send logs to a remote log host (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.1.6 "Ensure remote rsyslog messages are only accepted on designated log hosts. (Manual)" No Server1 Workstation1
+test_wrapper 4.2.2.1 "Ensure journald is configured to send logs to rsyslog (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.2.2 "Ensure journald is configured to compress large log files (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.2.3 "Ensure journald is configured to write logfiles to persistent disk (Automated)" Yes Server1 Workstation1
+test_wrapper 4.2.3 "Ensure permissions on all logfiles are configured (Manual)" No Server1 Workstation1
+test_wrapper 4.2.4 "Ensure logrotate is configured (Manual)" No Server1 Workstation1
+test_wrapper 5.1.1 "Ensure cron daemon is enabled and running (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.2 "Ensure permissions on /etc/crontab are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.3 "Ensure permissions on /etc/cron.hourly are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.4 "Ensure permissions on /etc/cron.daily are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.5 "Ensure permissions on /etc/cron.weekly are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.6 "Ensure permissions on /etc/cron.monthly are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.7 "Ensure permissions on /etc/cron.d are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.8 "Ensure cron is restricted to authorized users (Automated)" Yes Server1 Workstation1
+test_wrapper 5.1.9 "Ensure at is restricted to authorized users (Automated)" Yes Server1 Workstation1
+test_wrapper 5.2.1 "Ensure sudo is installed (Automated)" Yes Server1 Workstation1
+test_wrapper 5.2.2 "Ensure sudo commands use pty (Automated)" Yes Server1 Workstation1
+test_wrapper 5.2.3 "Ensure sudo log file exists (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.1 "Ensure permissions on /etc/ssh/sshd_config are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.2 "Ensure permissions on SSH private host key files are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.3 "Ensure permissions on SSH public host key files are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.4 "Ensure SSH access is limited (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.5 "Ensure SSH LogLevel is appropriate (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.6 "Ensure SSH X11 forwarding is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.7 "Ensure SSH MaxAuthTries is set to 4 or less (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.8 "Ensure SSH IgnoreRhosts is enabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.9 "Ensure SSH HostbasedAuthentication is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.10 "Ensure SSH root login is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.11 "Ensure SSH PermitEmptyPasswords is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.12 "Ensure SSH PermitUserEnvironment is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.13 "Ensure only strong Ciphers are used (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.14 "Ensure only strong MAC algorithms are used (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.15 "Ensure only strong Key Exchange algorithms are used (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.16 "Ensure SSH Idle Timeout Interval is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.17 "Ensure SSH LoginGraceTime is set to one minute or less (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.18 "Ensure SSH warning banner is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.19 "Ensure SSH PAM is enabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.20 "Ensure SSH AllowTcpForwarding is disabled (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.21 "Ensure SSH MaxStartups is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.3.22 "Ensure SSH MaxSessions is limited (Automated)" Yes Server1 Workstation1
+test_wrapper 5.4.1 "Ensure password creation requirements are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.4.2 "Ensure lockout for failed password attempts is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.4.3 "Ensure password hashing algorithm is SHA-512 (Automated)" Yes Server1 Workstation1
+test_wrapper 5.4.4 "Ensure password reuse is limited (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.1.1 "Ensure password expiration is 365 days or less (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.1.2 "Ensure minimum days between password changes is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.1.3 "Ensure password expiration warning days is 7 or more (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.1.4 "Ensure inactive password lock is 30 days or less (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.1.5 "Ensure all users last password change date is in the past (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.2 "Ensure system accounts are secured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.3 "Ensure default group for the root account is GID 0 (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.4 "Ensure default user shell timeout is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.5.5 "Ensure default user umask is configured (Automated)" Yes Server1 Workstation1
+test_wrapper 5.6 "Ensure root login is restricted to system console (Manual)" No Server1 Workstation1
+test_wrapper 5.7 "Ensure access to the su command is restricted (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.1 "Audit system file permissions (Manual)" No Server2 Workstation2
+test_wrapper 6.1.2 "Ensure permissions on /etc/passwd are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.3 "Ensure permissions on /etc/passwd- are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.4 "Ensure permissions on /etc/shadow are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.5 "Ensure permissions on /etc/shadow- are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.6 "Ensure permissions on /etc/gshadow- are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.7 "Ensure permissions on /etc/gshadow are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.8 "Ensure permissions on /etc/group are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.9 "Ensure permissions on /etc/group- are configured (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.10 "Ensure no world writable files exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.11 "Ensure no unowned files or directories exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.12 "Ensure no ungrouped files or directories exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.1.13 "Audit SUID executables (Manual)" No Server1 Workstation1
+test_wrapper 6.1.14 "Audit SGID executables (Manual)" No Server1 Workstation1
+test_wrapper 6.2.1 "Ensure accounts in /etc/passwd use shadowed passwords (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.2 "Ensure /etc/shadow password fields are not empty (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.3 "Ensure all groups in /etc/passwd exist in /etc/group (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.4 "Ensure shadow group is empty (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.5 "Ensure no duplicate user names exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.6 "Ensure no duplicate group names exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.7 "Ensure no duplicate UIDs exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.8 "Ensure no duplicate GIDs exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.9 "Ensure root is the only UID 0 account (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.10 "Ensure root PATH Integrity (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.11 "Ensure all users' home directories exist (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.12 "Ensure users own their home directories (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.13 "Ensure users' home directories permissions are 750 or more restrictive (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.14 "Ensure users' dot files are not group or world writable (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.15 "Ensure no users have .forward files (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.16 "Ensure no users have .netrc files (Automated)" Yes Server1 Workstation1
+test_wrapper 6.2.17 "Ensure no users have .rhosts files (Automated)" Yes Server1 Workstation1
 
 echo
 echo Results

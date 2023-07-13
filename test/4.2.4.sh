@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 4.2.4 - Ensure permissions on all logfiles are configured (Scored)
+# 4.2.4 - Ensure logrotate is configured (Manual) - Server1 Workstation1
 
-[[ $(find /var/log -type f -ls | grep -v "\-r\-\-\-\-\-\-\-\-" | grep -v "\-rw\-\-\-\-\-\-\-" | grep -v "\-rw\-r\-\-\-\-\-" | wc -l) -eq 0 ]] || exit 1
+cat /etc/logrotate.conf | tr '\n' '\r' | sed -e 's/{.*}//g' | tr '\r' '\n' | grep -v "^\s*#" | grep "maxage" || exit $?

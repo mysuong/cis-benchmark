@@ -1,8 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.3.1 - Ensure password creation requirements are configured (Scored)
+# 5.3.1 - Ensure permissions on /etc/ssh/sshd_config are configured (Automated) - Server1 Workstation1
 
-grep pam_cracklib.so /etc/pam.d/password-auth | grep -E "try_first_pass\s*retry=3\s*minlen=14" || exit $1
-
-grep pam_cracklib.so /etc/pam.d/system-auth | grep -E "try_first_pass\s*retry=3\s*minlen=14" || exit $1
+stat -L -c "%a %u %g" /etc/ssh/sshd_config | grep -q "600 0 0$" || exit $?

@@ -1,6 +1,6 @@
 #!/bin/sh
 # ** AUTO GENERATED **
 
-# 5.2.3 - Ensure SSH LogLevel is set to INFO (Scored)
+# 5.2.3 - Ensure sudo log file exists (Automated) - Server1 Workstation1
 
-grep "^\s*LogLevel" /etc/ssh/sshd_config | grep -q "LogLevel\s*INFO" || exit $?
+grep -Ei '^\s*Defaults\s+([^#;]+,\s*)?logfile\s*=\s*(")?[^#;]+(")?' /etc/sudoers /etc/sudoers.d/*
