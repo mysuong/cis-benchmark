@@ -213,7 +213,7 @@ test_wrapper 3.5.2.7 "Ensure nftables loopback traffic is configured (Automated)
 test_wrapper 3.5.2.8 "Ensure nftables outbound and established connections are configured (Manual)" No Server1 Workstation1
 test_wrapper 3.5.2.9 "Ensure nftables default deny firewall policy (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.2.10 "Ensure nftables service is enabled (Automated)" Yes Server1 Workstation1
-# test_wrapper 3.5.2.11 "Ensure nftables rules are permanent (Automated)" Yes Server1 Workstation1
+test_wrapper 3.5.2.11 "Ensure nftables rules are permanent (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.1.1 "Ensure iptables packages are installed (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.1.2 "Ensure nftables is not installed with iptables (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.1.3 "Ensure firewalld is either not installed or masked with iptables (Automated)" Yes Server1 Workstation1
