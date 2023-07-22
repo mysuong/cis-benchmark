@@ -5,8 +5,8 @@
 
 cmd="$(systemctl is-enabled ntpd | grep 'enabled')"
 if [[ -n "${cmd}" ]]; then
- grep -E "^(server|pool)" /etc/ntp.conf || exit $?
+    grep -E "^(server|pool)" /etc/ntp.conf || exit $?
 else
- exit 1
+    exit 1
 fi
 

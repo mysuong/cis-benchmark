@@ -3,4 +3,4 @@
 
 # 1.1.2 - Ensure /tmp is configured (Automated) - Server1 Workstation1
 
-findmnt /tmp || exit $?
+findmnt -n /tmp || exit $?
