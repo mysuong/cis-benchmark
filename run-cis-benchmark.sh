@@ -225,6 +225,10 @@ test_wrapper 3.5.3.2.5 "Ensure iptables rules are saved (Automated)" Yes Server1
 test_wrapper 3.5.3.2.6 "Ensure iptables is enabled and running (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.3.1 "Ensure ip6tables loopback traffic is configured (Automated)" Yes Server1 Workstation1
 test_wrapper 3.5.3.3.2 "Ensure ip6tables outbound and established connections are configured (Manual)" No Server1 Workstation1
+test_wrapper 3.5.3.3.3 "Ensure ip6tables firewall rules exist for all open ports (Automated)" Yes Server1 Workstation1
+test_wrapper 3.5.3.3.4 "Ensure ip6tables default deny firewall policy (Automated)" Yes Server1 Workstation1
+test_wrapper 3.5.3.3.5 "Ensure ip6tables rules are saved (Automated)" Yes Server1 Workstation1
+test_wrapper 3.5.3.3.6 "Ensure ip6tables is enabled and running (Automated)" Yes Server1 Workstation1
 test_wrapper 4.1.1.1 "Ensure auditd is installed (Automated)" Yes Server2 Workstation2
 test_wrapper 4.1.1.2 "Ensure auditd service is enabled and running (Automated)" Yes Server2 Workstation2
 test_wrapper 4.1.1.3 "Ensure auditing for processes that start prior to auditd is enabled (Automated)" Yes Server2 Workstation2
