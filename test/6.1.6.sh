@@ -3,4 +3,4 @@
 
 # 6.1.6 - Ensure permissions on /etc/gshadow- are configured (Automated) - Server1 Workstation1
 
-stat -L -c "%a %u %g" /etc/gshadow- | grep -q "0000 0 0$" || exit $?
+stat -L -c "%a %u %g" /etc/gshadow- | grep -q "^0 0 0$" || exit $?

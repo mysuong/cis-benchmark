@@ -3,9 +3,17 @@
 
 # 5.5.1.3 - Ensure password expiration warning days is 7 or more (Automated) - Server1 Workstation1
 
-warnage=$(grep ^\s*PASS_WARN_AGE /etc/login.defs | awk '{ print$2 ')
-if [[ ${warnage} < 7 ]]; then exit 1; fi
+PWA=$(grep -E "^PASS_WARN_AGE" /etc/login.defs | awk {'print $2'})
 
-for days in $(grep -E '^[^:]+:[^!*]' /etc/shadow | cut -d: -f6); do
-    if [[ ${days} < 7 ]]; then exit 1; fi
+if [[ $PWA -eq '' || $PWA -lt 7 ]]; then
+        echo PASS_WARN_AGE = $PWA
+        exit 1
+fi
+
+for i in $(egrep ^[^:]+:[^\!*] /etc/shadow | cut -d: -f1 ); do
+        UPA=$(chage --list $i | grep "Number of days of warning before password expires" | cut -d: -f2)
+        if [[ $UPA -lt 7 ]]; then
+                echo $i password warn age = $UPA
+                exit 1
+        fi
 done

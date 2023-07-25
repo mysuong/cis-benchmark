@@ -3,4 +3,5 @@
 
 # 4.2.2.1 - Ensure journald is configured to send logs to rsyslog (Automated) - Server1 Workstation1
 
-systemctl is-enabled rsyslog | grep enabled || exit $?
+check=$(grep -E ^\s*ForwardToSyslog /etc/systemd/journald.conf)
+[[ -z "${check}" ]]|| exit $?
