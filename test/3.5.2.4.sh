@@ -5,5 +5,5 @@
 
 # For iptables:
 iptables -L | grep -E "(No rules should be returned)" | exit $?
-# For iptables:
+# For ip6tables:
 ip6tables -L | grep -E "(No rules should be returned)" | exit $?
